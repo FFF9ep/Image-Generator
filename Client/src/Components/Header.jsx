@@ -28,6 +28,7 @@ const Header = () => {
                     width={70}/>
                 ))}
             </div>
+            <p className='mt-2 text-neutral-600'>Generate Images from imagify</p>
         </div>
     )
 }
