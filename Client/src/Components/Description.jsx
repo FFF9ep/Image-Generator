@@ -11,6 +11,7 @@ const Description = () => {
                 <img src={assets.sample_img_1} alt="" className='w-80 xl:w-96 rounded-lg'/>
                 <div>
                     <h2>Introducing the AI-Powered Text to Image Generator</h2>
+                    <p>Easily bring your ideas to life with our free AI image generator. Whether you need stunning visuals or unique imagery, out tool transform your text into eye-catching images with just a few clicks. Image it, describe it, and watch it come to life instantly.</p>
                 </div>
             </div>
         </div>
