@@ -8,7 +8,15 @@ const Steps = () => {
             <p className='text-lg text-gray-600 mb-8'>Transform Word Into Stunning Images</p>
 
             <div>
-                {stepsData}
+                {stepsData.map((item, index) => (
+                    <div key={index}>
+                        <img src={item.icon} alt="" />
+                        <div>
+                            <h2>{item.title}</h2>
+                            <p>{item.description}</p>
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
     )
