@@ -17,6 +17,7 @@ const App = () => {
         <Route path='/buy' element={<BuyCredit/>}/>
       </Routes>
       <Footer/>
+      
     </div>
   )
 }
