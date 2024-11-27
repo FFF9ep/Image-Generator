@@ -10,7 +10,9 @@ const Testimonials = () => {
             <div className='flex flex-wrap gap-6'>
                 {testimonialsData.map((testimonials, index) => (
                     <div key={index}>
-                        
+                        <div>
+                            <img src={testimonials.image} alt="" className='rounded-full w-14' />
+                        </div>
                     </div>
                 ))}
             </div>
