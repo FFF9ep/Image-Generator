@@ -4,7 +4,7 @@ import { assets } from "../assets/assets";
 const Result = () => {
     return (
         <form>
-        <div>
+        <div className='flex flex-col min-h-[90vh] justify-center items-center'>
             <div className='relative'>
                 <img src={assets.sample_img_1} alt="" className='max-w-sm rounded'/>
                 <span className=' absolute bottom-0 left-0 h-1 bg-blue-500 w-full transition-all duration-[10s]'/>
@@ -12,7 +12,7 @@ const Result = () => {
             <p>Loading...</p>
         </div>
 
-        <div>
+        <div className='flex w-full max-w-xl bg-neutral-500 text-white text-sm p-0.5 mt-10 rounded-full'>
             <input 
             type="text" 
             placeholder='Describe what you want to generate!' 
