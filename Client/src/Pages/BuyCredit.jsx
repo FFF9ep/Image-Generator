@@ -3,7 +3,8 @@ import React from 'react'
 const BuyCredit = () => {
     return (
         <div>
-            Buy Credit
+            <button>Our Plans</button>
+            <h1>Choose the plan</h1>
         </div>
     )
 }
