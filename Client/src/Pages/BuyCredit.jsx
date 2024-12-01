@@ -12,10 +12,10 @@ const BuyCredit = () => {
                     <div 
                     key={index} 
                     className='bg-white drop-shadow-sm border rounded-lg py-12 px-8 text-gray-600 hover:scale-105 transition-all duration-500'>
-                        <img src={assets.logo_icon} alt="" />
-                        <p>{item.id}</p>
-                        <p>{item.desc}</p>
-                        <p>${item.price} / {item.credits} credits</p>
+                        <img width={40} src={assets.logo_icon} alt="" />
+                        <p className='mt-3 mb-1 font-semibold'>{item.id}</p>
+                        <p className='text-sm'>{item.desc}</p>
+                        <p className='mt-6'>${item.price} / {item.credits} credits</p>
                     </div>
                 ))}
             </div>
