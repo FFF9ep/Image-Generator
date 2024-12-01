@@ -1,4 +1,5 @@
 import React from 'react'
+import { plans } from '../assets/assets'
 
 const BuyCredit = () => {
     return (
@@ -7,7 +8,11 @@ const BuyCredit = () => {
             <h1 className='text-center text-3xl font-medium mb-6 sm:mb-10'>Choose the plan</h1>
 
             <div>
-                
+                {plans.map((item, index) => (
+                    <div key={index}>
+                        
+                    </div>
+                ))}
             </div>
         </div>
     )
