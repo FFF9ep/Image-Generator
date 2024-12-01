@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { assets, plans } from '../assets/assets'
+import { AppContext } from '../Context/AppContext';
 
 const BuyCredit = () => {
+
+    const {user} = useContext(AppContext);
+
     return (
         <div className='min-h-[80vh] text-center pt-14 mb-10'>
             <button className='border border-gray-400 px-10 py-2 rounded-full mb-6'>Our Plans</button>
