@@ -1,5 +1,5 @@
 import React from 'react'
-import { plans } from '../assets/assets'
+import { assets, plans } from '../assets/assets'
 
 const BuyCredit = () => {
     return (
@@ -10,7 +10,9 @@ const BuyCredit = () => {
             <div>
                 {plans.map((item, index) => (
                     <div key={index}>
-                        
+                        <img src={assets.lock_icon} alt="" />
+                        <p>{item.id}</p>
+                        <p>{item.desc}</p>
                     </div>
                 ))}
             </div>
