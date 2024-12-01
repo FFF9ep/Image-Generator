@@ -13,7 +13,7 @@ const BuyCredit = () => {
                         <img src={assets.lock_icon} alt="" />
                         <p>{item.id}</p>
                         <p>{item.desc}</p>
-                        <p>{item.price} / {item.credits} credits</p>
+                        <p>${item.price} / {item.credits} credits</p>
                     </div>
                 ))}
             </div>
