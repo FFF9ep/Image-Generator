@@ -7,9 +7,9 @@ const Login = () => {
       
     <form className='relative bg-white p-10 rounded-xl text-slate-500'>
         <h1 className='text-center text-2xl text-neutral-700 font-medium'>Sign Up</h1>
-        <p>Welcomeback! Please sign in to continue</p>
+        <p className='text-sm'>Welcomeback! Please sign in to continue</p>
 
-        <div>
+        <div className='border px-6 py-2 flex items-center gap-2 rounded-full mt-5'>
             <img src={assets.user_icon} alt="" />
             <input type="text" placeholder='Full Name' required />
         </div>
