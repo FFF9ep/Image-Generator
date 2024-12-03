@@ -21,6 +21,8 @@ const Login = () => {
             <img src={assets.lock_icon} alt="" />
             <input type="password" className='outline-none text-sm' placeholder='Password' required />
         </div>
+
+        <p className='text-sm text-blue-600 my-4 cursor-pointer'>Forgot Password?</p>
     </form>
     </div>
   )
