@@ -10,8 +10,16 @@ const Login = () => {
         <p className='text-sm'>Welcomeback! Please sign in to continue</p>
 
         <div className='border px-6 py-2 flex items-center gap-2 rounded-full mt-5'>
-            <img src={assets.user_icon} alt="" />
+            <img src={assets} alt="" />
             <input type="text" className='outline-none text-sm' placeholder='Full Name' required />
+        </div>
+        <div className='border px-6 py-2 flex items-center gap-2 rounded-full mt-5'>
+            <img src={assets.email_icon} alt="" />
+            <input type="email" className='outline-none text-sm' placeholder='Email id' required />
+        </div>
+        <div className='border px-6 py-2 flex items-center gap-2 rounded-full mt-5'>
+            <img src={assets.lock_icon} alt="" />
+            <input type="password" className='outline-none text-sm' placeholder='Password' required />
         </div>
     </form>
     </div>
