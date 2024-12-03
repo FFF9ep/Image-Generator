@@ -23,6 +23,8 @@ const Login = () => {
         </div>
 
         <p className='text-sm text-blue-600 my-4 cursor-pointer'>Forgot Password?</p>
+
+        <button className='bg-blue-600 w-full text-white py-2 rounded-full'>Create Account</button>
     </form>
     </div>
   )
