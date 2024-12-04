@@ -52,7 +52,7 @@ const Header = () => {
             className='flex flex-wrap justify-center mt-16 gap-3'>
                 {Array(6).fill('').map((item,index) => (
                     <motion.img
-                    whileHover={{ scale}}
+                    whileHover={{ scale: 1.05, duration: 0.1 }}
                     className='rounded hover:scale-105 transition-all duration-300 cursor-pointer max-sm:w-10' 
                     src={index % 2 === 0 ? assets.sample_img_2 : assets.sample_img_1} 
                     alt="" 
