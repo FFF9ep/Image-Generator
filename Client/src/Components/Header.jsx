@@ -1,6 +1,6 @@
 import React from 'react'
 import { assets } from '../assets/assets'
-import { motion } from "motion/react"
+import { delay, motion } from "motion/react"
 
 const Header = () => {
     return (
@@ -12,10 +12,15 @@ const Header = () => {
         viewport={{ once: true }}
         >
 
-            <div className='text-stone-500 inline-flex text-center gap-2 bg-white px-6 py-1 rounded-full border border-neutral-500'>
+            <motion.div 
+            className='text-stone-500 inline-flex text-center gap-2 bg-white px-6 py-1 rounded-full border border-neutral-500'
+            initial={{opacity:0, y:-20}}
+            animate={{ opacity: 1, y: 0 }}
+            duration={{ delay: 0.2, duration:0.8 }}
+            >
                 <p>Best Text to Image Generator</p>
                 <img src={assets.star_icon} alt="" />
-            </div>
+            </motion.div>
 
             <h1 className='text-4xl max-w-[300px] sm:text-7xl sm:max-w-[590px] mx-auto mt-10 text-center'>Turn Text to <span className='text-blue-600'>Image</span>, in seconds</h1>
 
