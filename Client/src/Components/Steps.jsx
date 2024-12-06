@@ -5,7 +5,7 @@ import { motion } from 'motion/react'
 const Steps = () => {
     return (
         <motion.div
-            initial= {{ opacity: 0.2, y:100 }}
+            initial= {{ opacity: 0.2, y: 100 }}
             transition= {{ duration: 1 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport= {{ once: true }}
