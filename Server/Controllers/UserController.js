@@ -30,3 +30,27 @@ const registerUser = async (req, res) => {
         res.json({success:false, message: error.message})
     }
 }
+
+const loginUser = async (req, res) => {
+    try {
+        const {email, password} = req.body;
+        const user = await userModel.findOne({email});
+
+        if (!user) {
+            return res.json({success:false, message: "User Not Found!"})
+        }
+
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
+        if (isPasswordMatch) {
+            const token = jwt.sign({id: user._id}, process.env.JWT_SECRET_KEY)
+            res.json({success:true, token, user: {name: user.name}})
+
+        } else {
+            return res.json({success:false, message: "Invalid Email or Password!"})
+        }
+
+    } catch (error) {
+        console.log(error);
+        res.json({success:false, message: error.message})
+    }
+}
