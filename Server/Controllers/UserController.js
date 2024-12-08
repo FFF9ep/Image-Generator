@@ -1,12 +1,12 @@
 import userModel from "../Models/UserModel.js";
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 const registerUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
         if (!name || !email || !password) {
-            return res.json({success:false, message: "Please fill all the fields"})
+            return res.json({success:false, message: 'Please fill all the fields'})
         }
 
         const salt = await bcrypt.genSalt(10);
@@ -21,7 +21,7 @@ const registerUser = async (req, res) => {
         const newUser = new userModel(userData);
         const user = await newUser.save();
 
-        const token = jwt.sign({id: user._id}, process.env.JWT_SECRET_KEY, {expiresIn: "1d"})
+        const token = jwt.sign({id: user._id}, process.env.JWT_SECRET_KEY)
 
         res.json({success:true, token, user: {name: user.name}})
 
@@ -37,7 +37,7 @@ const loginUser = async (req, res) => {
         const user = await userModel.findOne({email});
 
         if (!user) {
-            return res.json({success:false, message: "User Not Found!"})
+            return res({success:false, message: 'User Not Found!'})
         }
 
         const isPasswordMatch = await bcrypt.compare(password, user.password);
@@ -46,7 +46,7 @@ const loginUser = async (req, res) => {
             res.json({success:true, token, user: {name: user.name}})
 
         } else {
-            return res.json({success:false, message: "Invalid Email or Password!"})
+            return res.json({success:false, message: 'Invalid Email or Password!'})
         }
 
     } catch (error) {
@@ -54,3 +54,5 @@ const loginUser = async (req, res) => {
         res.json({success:false, message: error.message})
     }
 }
+
+export { registerUser, loginUser }
