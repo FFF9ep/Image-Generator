@@ -6,11 +6,14 @@ const AppContextProvider = (props) => {
     const [user, setUser] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
 
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
     const value = {
         user,
         setUser,
         showLogin,
-        setShowLogin
+        setShowLogin,
+        backendUrl
     }
 
     return (
