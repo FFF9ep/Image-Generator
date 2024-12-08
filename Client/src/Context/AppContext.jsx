@@ -5,6 +5,8 @@ export const AppContext = createContext();
 const AppContextProvider = (props) => {
     const [user, setUser] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
+    const [token, setToken] = useState(localStorage.getItem('token'));
+    const [credits, setCredits] = useState(false);
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -13,7 +15,11 @@ const AppContextProvider = (props) => {
         setUser,
         showLogin,
         setShowLogin,
-        backendUrl
+        backendUrl,
+        token,
+        setToken,
+        credits, 
+        setCredits
     }
 
     return (
