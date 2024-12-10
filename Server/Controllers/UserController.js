@@ -159,7 +159,7 @@ const verifyPayment = async (req, res) => {
 
             await transactionModel.findByIdAndUpdate(transactionData._id, {payment: true});
             res.json({success:true, message: 'Payment Success!'})
-            
+
         }else {
             res.json({success:false, message: 'Payment Failed!'})
         }
@@ -169,5 +169,5 @@ const verifyPayment = async (req, res) => {
     }
 }
 
-export { registerUser, loginUser, userCredits, paymentRazorpay }
+export { registerUser, loginUser, userCredits, paymentRazorpay, verifyPayment }
 
