@@ -75,7 +75,8 @@ const AppContextProvider = (props) => {
         credits, 
         setCredits,
         loadCreditsData,
-        logout
+        logout,
+        generateImage
     }
 
     return (
