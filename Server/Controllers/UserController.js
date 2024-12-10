@@ -75,6 +75,16 @@ const userCredits = async (req, res) => {
 const razorpayInstance = new razorpay({
     key_id: process.env.RAZORPAY_KEY_ID,
     key_secret: process.env.RAZORPAY_KEY_SECRET
-})
+});
 
-export { registerUser, loginUser, userCredits }
+const paymentRazorpay = async (req, res) => {
+    try {
+        
+    } catch (error) {
+        console.log(error);
+        res.json({success:false, message: error.message})
+    }
+}
+
+export { registerUser, loginUser, userCredits, paymentRazorpay }
+
