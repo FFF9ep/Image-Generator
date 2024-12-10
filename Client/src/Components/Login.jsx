@@ -2,15 +2,33 @@ import React, { useContext, useEffect, useState } from 'react'
 import { assets } from '../assets/assets'
 import { AppContext } from '../Context/AppContext';
 import { motion } from 'motion/react';
+import axios from 'axios';
 
 const Login = () => {
 
   const [state, setState] = useState('Login');
-  const {setShowLogin} = useContext(AppContext);
+  const {setShowLogin, backendUrl, setToken, setUser} = useContext(AppContext);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+
+    try {
+      if (state === 'Login') {
+        const {data} = await axios.post(backendUrl + '/api/user/login', {email, password});
+
+        if (data.success) {
+          setToken(data.token);
+        }
+        
+      }
+    } catch (error) {
+      
+    }
+  }
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -23,7 +41,7 @@ const Login = () => {
   return (
     <div className='fixed top-0 left-0 right-0 bottom-0 z-10 backdrop-blur-sm bg-black/30 flex justify-center items-center'>
       
-    <motion.form 
+    <motion.form onSubmit={onSubmitHandler}
     initial={{ opacity: 0.2, y: 50 }}
     transition={{ duration: 0.3 }}
     whileInView={{ opacity: 1, y: 0 }}
