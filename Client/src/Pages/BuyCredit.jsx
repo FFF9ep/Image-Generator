@@ -13,36 +13,143 @@ const BuyCredit = () => {
     const navigate = useNavigate();
 
     const initPay = async (order) => {
-        const options = {
-            key: import.meta.env.VITE_RAZORPAY_KEY_ID,
-            amount: order.amount,
-            currency: order.currency,
-            name: 'Credit Payment ImageEngine',
-            description: 'Payment for credits',
-            order_id: order.id,
-            receipt: order.receipt,
-            handler: async (response) => {
-                console.log(response);
+        try {
+            if (!window.Razorpay) {
+                throw new Error("Razorpay SDK tidak ditemukan");
             }
+
+            const options = {
+                key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+                amount: order.amount,
+                currency: order.currency || 'INR',
+                name: 'Credit Payment ImageEngine',
+                description: 'Payment for credits',
+                order_id: order.id,
+                prefill: {
+                    name: user?.name || '',
+                    email: user?.email || '',
+                },
+                handler: async function(response) {
+                    try {
+                        // Verifikasi pembayaran di backend
+                        const verifyData = await axios.post(
+                            backendUrl + '/api/user/verify-payment',
+                            {
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                razorpay_order_id: response.razorpay_order_id,
+                                razorpay_signature: response.razorpay_signature,
+                                orderId: order.id
+                            },
+                            {
+                                headers: { token }
+                            }
+                        );
+
+                        if (verifyData.data.success) {
+                            toast.success("Pembayaran berhasil!");
+                            loadCreditsData(); // Refresh credit data
+                            navigate('/dashboard'); // Redirect ke dashboard
+                        }
+                    } catch (error) {
+                        console.error("Verification Error:", error);
+                        toast.error("Gagal memverifikasi pembayaran");
+                    }
+                },
+                modal: {
+                    ondismiss: function() {
+                        toast.info("Pembayaran dibatalkan");
+                    }
+                },
+                theme: {
+                    color: '#000000'
+                }
+            };
+
+            const rzp = new window.Razorpay(options);
+            
+            rzp.on('payment.failed', function(response) {
+                console.error("Payment Failed:", response.error);
+                toast.error(response.error.description || "Pembayaran gagal");
+            });
+
+            rzp.open();
+
+        } catch (error) {
+            console.error("Razorpay Init Error:", error);
+            toast.error(error.message || "Gagal memulai pembayaran");
         }
-        const rzp = new window.Razorpay(options);
-        rzp.open();
     }
+
+    const loadRazorpayScript = () => {
+        return new Promise((resolve) => {
+            if (window.Razorpay) {
+                resolve();
+                return;
+            }
+            const script = document.createElement('script');
+            script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+            script.onload = () => {
+                resolve();
+            };
+            document.body.appendChild(script);
+        });
+    };
 
     const paymentRazorpay = async (plan) => {
         try {
             if (!user) {
                 setShowLogin(true);
+                return;
             }
 
-            const {data} =await axios.post(backendUrl + '/api/user/pay-razor', {plan}, {headers: {token}});
-
-            if (data.success) {
-                initPay(data.order);
+            // Validasi data yang diperlukan
+            if (!plan) {
+                toast.error("Silakan pilih paket terlebih dahulu");
+                return;
             }
 
+            if (!user.email || !user.name) {
+                toast.error("Data profil tidak lengkap. Silakan lengkapi profil Anda");
+                return;
+            }
+
+            // Load Razorpay script first
+            await loadRazorpayScript();
+
+            toast.info("Memproses pembayaran...");
+
+            const {data} = await axios.post(backendUrl + '/api/user/pay-razor', 
+                {
+                    plan,
+                    userEmail: user.email,
+                    userName: user.name,
+                    userId: user._id
+                }, 
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        token
+                    }
+                }
+            );
+
+            if (!data.success) {
+                throw new Error(data.message || "Gagal membuat order");
+            }
+
+            if (!data.order || !data.order.id || !data.order.amount) {
+                throw new Error("Data order tidak lengkap");
+            }
+
+            await initPay(data.order);
+            
         } catch (error) {
-            toast.error(error.message);
+            console.error("Payment Error:", error);
+            if (error.response?.data?.message) {
+                toast.error(error.response.data.message);
+            } else {
+                toast.error(error.message || "Terjadi kesalahan saat memproses pembayaran");
+            }
         }
     }
 
