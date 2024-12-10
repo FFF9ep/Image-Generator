@@ -28,6 +28,12 @@ const AppContextProvider = (props) => {
         }
     }
 
+    const logout = () => {
+        localStorage.removeItem('token');
+        setToken('');
+        setUser(null);
+    }
+
     useEffect(() => {
         if (token) {
             loadCreditsData();
@@ -44,7 +50,8 @@ const AppContextProvider = (props) => {
         setToken,
         credits, 
         setCredits,
-        loadCreditsData
+        loadCreditsData,
+        logout
     }
 
     return (
