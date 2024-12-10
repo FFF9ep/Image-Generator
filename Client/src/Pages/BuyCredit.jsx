@@ -48,7 +48,7 @@ const BuyCredit = () => {
                         if (verifyData.data.success) {
                             toast.success("Pembayaran berhasil!");
                             loadCreditsData(); // Refresh credit data
-                            navigate('/dashboard'); // Redirect ke dashboard
+                            navigate('/'); // Redirect ke dashboard
                         }
                     } catch (error) {
                         console.error("Verification Error:", error);
