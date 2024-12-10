@@ -79,7 +79,36 @@ const razorpayInstance = new razorpay({
 
 const paymentRazorpay = async (req, res) => {
     try {
+        const {userId, planId} = req.body;
+        const userData = await userModel.findById(userId);
+
+        if (!userId || !planId) {
+            return res.json({success:false, message: 'Please fill all the fields!'})
+        }
+
+        let credits, plan, amount, date;
+
+        switch (planId) {
+            case 'Basic':
+                plan = 'Basic';
+                credits = 100;
+                amount = 10;
+                break;
+            case 'Advance':
+                plan = 'Advance';
+                credits = 500;
+                amount = 50;
+                break;
+            case 'Business':
+                plan = 'Business';
+                credits = 5000;
+                amount = 250;
+                break;
         
+            default:
+                return res.json({ success:false, message: 'plan not found!' });
+        }
+
     } catch (error) {
         console.log(error);
         res.json({success:false, message: error.message})
