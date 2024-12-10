@@ -1,4 +1,4 @@
-# Nama Proyek
+# Image Engine
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/username/repo)
 ![GitHub issues](https://img.shields.io/github/issues/username/repo)
@@ -6,7 +6,7 @@
 
 ## Deskripsi
 
-Deskripsikan proyek Anda di sini. Jelaskan tujuan, fitur utama, dan teknologi yang digunakan.
+Text to Image
 
 ## Demo
 
