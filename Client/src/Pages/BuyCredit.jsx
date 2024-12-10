@@ -13,7 +13,20 @@ const BuyCredit = () => {
     const navigate = useNavigate();
 
     const initPay = async (order) => {
-        
+        const options = {
+            key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+            amount: order.amount,
+            currency: order.currency,
+            name: 'Credit Payment ImageEngine',
+            description: 'Payment for credits',
+            order_id: order.id,
+            receipt: order.receipt,
+            handler: async (response) => {
+                console.log(response);
+            }
+        }
+        const rzp = new window.Razorpay(options);
+        rzp.open();
     }
 
     const paymentRazorpay = async (plan) => {
