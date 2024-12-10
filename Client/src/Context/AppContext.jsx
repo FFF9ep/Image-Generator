@@ -28,6 +28,14 @@ const AppContextProvider = (props) => {
         }
     }
 
+    const generateImage = async (prompt) => {
+        try {
+            
+        } catch (error) {
+            
+        }
+    }
+
     const logout = () => {
         localStorage.removeItem('token');
         setToken('');
