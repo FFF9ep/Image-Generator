@@ -1,6 +1,7 @@
 import userModel from "../Models/UserModel.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import razorpay from 'razorpay';
 
 const registerUser = async (req, res) => {
     try {
@@ -70,5 +71,10 @@ const userCredits = async (req, res) => {
         res.json({success:false, message: error.message})
     }
 }
+
+const razorpayInstance = new razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET
+})
 
 export { registerUser, loginUser, userCredits }
